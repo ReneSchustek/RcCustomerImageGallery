@@ -18,12 +18,12 @@ use Shopware\Core\System\CustomField\CustomFieldEntity;
 use Shopware\Core\System\CustomField\CustomFieldTypes;
 
 /**
- * Idempotenter Installer fuer das Produkt-CustomFieldSet der Kundenbild-Galerie.
+ * Idempotenter Installer für das Produkt-CustomFieldSet der Kundenbild-Galerie.
  *
  * Nach Haus-Standard (3-Ebenen-Idempotenz): Set-ID, Field-ID und Relation-ID werden
- * vor jedem Upsert per Name aufgeloest und in die Payload gespiegelt, damit ein
+ * vor jedem Upsert per Name aufgelöst und in die Payload gespiegelt, damit ein
  * Re-Install/Update keine uniq-Indizes (custom_field.name,
- * custom_field_set_relation.entity_name) verletzt. Type-Drift aus aelteren
+ * custom_field_set_relation.entity_name) verletzt. Type-Drift aus älteren
  * Installationen wird vor dem Upsert reconciled, weil der Feld-Type in Shopware
  * immutable ist.
  */
@@ -54,7 +54,7 @@ final class GalleryCustomFieldInstaller
         // ihre IDs zu mappen. Der nachfolgende upsert legt sie dann mit korrektem Type neu an.
         $this->reconcileTypeDrift($fields, $context);
 
-        // Bestehende Felder per Name -> ID aufloesen, damit upsert UPDATE statt INSERT macht
+        // Bestehende Felder per Name -> ID auflösen, damit upsert UPDATE statt INSERT macht
         // (sonst kollidiert der uniq.custom_field.name-Index beim Upgrade einer Bestandsinstallation).
         $fields = $this->enrichWithExistingIds($fields, $context);
 
@@ -179,7 +179,7 @@ final class GalleryCustomFieldInstaller
 
         $this->customFieldRepository->delete($toDelete, $context);
 
-        $this->logger->info('RcCustomerImageGallery: Type-Drift in CustomField-Definitionen aufgeloest.', [
+        $this->logger->info('RcCustomerImageGallery: Type-Drift in CustomField-Definitionen aufgelöst.', [
             'context' => self::LOG_CONTEXT,
             'droppedCount' => count($toDelete),
             'drift' => $drift,
@@ -283,8 +283,8 @@ final class GalleryCustomFieldInstaller
     }
 
     /**
-     * Ein einziges JSON-Feld haelt die geordnete Liste der Media-UUIDs. Die Auswahl
-     * erfolgt ueber den eigenen Produkt-Tab (sw-media-modal-v2), daher braucht das Feld
+     * Ein einziges JSON-Feld hält die geordnete Liste der Media-UUIDs. Die Auswahl
+     * erfolgt über den eigenen Produkt-Tab (sw-media-modal-v2), daher braucht das Feld
      * keine Default-Storefront-Komponente.
      *
      * @return array<int, array<string, mixed>>
@@ -301,7 +301,7 @@ final class GalleryCustomFieldInstaller
                         'en-GB' => 'Customer Image Gallery: Media',
                     ],
                     'helpText' => [
-                        'de-DE' => 'Geordnete Liste der Media-IDs, die in der Produkt-Galerie angezeigt werden. Pflege ueber den Tab „Kundenbilder-Galerie".',
+                        'de-DE' => 'Geordnete Liste der Media-IDs, die in der Produkt-Galerie angezeigt werden. Pflege über den Tab „Kundenbilder-Galerie".',
                         'en-GB' => 'Ordered list of media IDs shown in the product gallery. Managed via the "Customer Image Gallery" tab.',
                     ],
                     'customFieldType' => 'json',

@@ -76,7 +76,7 @@ Component.register('rc-cig-product-tab', {
                 });
         },
 
-        // Loest die gespeicherten IDs in MediaEntities auf und stellt die gepflegte Reihenfolge wieder her.
+        // Löst die gespeicherten IDs in MediaEntities auf und stellt die gepflegte Reihenfolge wieder her.
         loadMedia() {
             const ids = this.mediaIds.filter((id) => typeof id === 'string' && id.length > 0);
             if (ids.length === 0) {
@@ -96,7 +96,7 @@ Component.register('rc-cig-product-tab', {
             });
         },
 
-        // Schreibt die aktuelle Reihenfolge der Vorschau zurueck ins CustomField.
+        // Schreibt die aktuelle Reihenfolge der Vorschau zurück ins CustomField.
         syncIdsFromItems() {
             if (!this.product) {
                 return;

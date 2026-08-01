@@ -13,7 +13,7 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsAnyFilter;
 
 /**
- * Loest die im Produkt-CustomField hinterlegten Media-IDs in echte MediaEntities auf.
+ * Löst die im Produkt-CustomField hinterlegten Media-IDs in echte MediaEntities auf.
  *
  * Die Bildquelle ist die manuell im Admin-Tab gepflegte, geordnete ID-Liste
  * (CustomField rc_customer_image_gallery_media_ids). Die DAL liefert bei
@@ -80,7 +80,7 @@ final class GalleryLoader
     }
 
     /**
-     * Stellt die Reihenfolge der gepflegten ID-Liste wieder her (DAL gibt unsortiert zurueck).
+     * Stellt die Reihenfolge der gepflegten ID-Liste wieder her (DAL gibt unsortiert zurück).
      *
      * @param list<string> $mediaIds
      *

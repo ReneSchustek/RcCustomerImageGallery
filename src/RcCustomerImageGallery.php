@@ -42,7 +42,7 @@ final class RcCustomerImageGallery extends Plugin
     {
         $container = $this->container;
         if ($container === null) {
-            throw new \RuntimeException('Plugin-Container ist im aktuellen Lifecycle-Zustand nicht verfuegbar.');
+            throw new \RuntimeException('Plugin-Container ist im aktuellen Lifecycle-Zustand nicht verfügbar.');
         }
 
         /** @var EntityRepository<CustomFieldSetCollection> $setRepository */

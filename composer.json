@@ -1,6 +1,6 @@
 {
     "name": "ruhrcoder/rc-customer-image-gallery",
-    "description": "Shopware 6 Plugin — pro Produkt manuell aus der Media-Bibliothek gewaehlte Bildergalerie auf der Produktdetailseite",
+    "description": "Shopware 6 Plugin — pro Produkt manuell aus der Media-Bibliothek gewählte Bildergalerie auf der Produktdetailseite",
     "type": "shopware-platform-plugin",
     "license": "MIT",
     "version": "1.1.0",
@@ -27,7 +27,7 @@
             "en-GB": "Customer Image Gallery"
         },
         "description": {
-            "de-DE": "Manuell pro Produkt aus der Media-Bibliothek gewaehlte Bildergalerie auf der Produktdetailseite.",
+            "de-DE": "Manuell pro Produkt aus der Media-Bibliothek gewählte Bildergalerie auf der Produktdetailseite.",
             "en-GB": "Per-product image gallery selected manually from the media library, shown on the product detail page."
         },
         "manufacturerLink": {
