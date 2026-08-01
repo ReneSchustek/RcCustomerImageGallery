@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="https://raw.githubusercontent.com/shopware/shopware/trunk/src/Core/System/SystemConfig/Schema/config.xsd">
+    <card>
+        <title>Allgemein</title>
+        <title lang="en-GB">General</title>
+
+        <input-field type="bool">
+            <name>enabled</name>
+            <label>Galerie anzeigen</label>
+            <label lang="en-GB">Show gallery</label>
+            <defaultValue>true</defaultValue>
+        </input-field>
+
+        <input-field type="int">
+            <name>limit</name>
+            <label>Maximale Anzahl Bilder</label>
+            <label lang="en-GB">Maximum number of images</label>
+            <helpText>Geclampt auf 1-50.</helpText>
+            <helpText lang="en-GB">Clamped to 1-50.</helpText>
+            <defaultValue>12</defaultValue>
+        </input-field>
+    </card>
+</config>

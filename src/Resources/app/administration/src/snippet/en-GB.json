@@ -1,0 +1,14 @@
+{
+  "rcCustomerImageGallery": {
+    "productTab": {
+      "title": "Customer Image Gallery",
+      "intro": "Select images from the media library to be shown as a gallery on the product detail page. The preview order matches the order shown in the shop.",
+      "selectImages": "Select images",
+      "empty": "No images selected yet. Use \"Select images\" to add media from the library.",
+      "moveUp": "Move up",
+      "moveDown": "Move down",
+      "remove": "Remove",
+      "saved": "Customer image gallery saved."
+    }
+  }
+}

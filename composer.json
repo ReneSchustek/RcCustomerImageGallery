@@ -1,0 +1,71 @@
+{
+    "name": "ruhrcoder/rc-customer-image-gallery",
+    "description": "Shopware 6 Plugin — pro Produkt manuell aus der Media-Bibliothek gewaehlte Bildergalerie auf der Produktdetailseite",
+    "type": "shopware-platform-plugin",
+    "license": "MIT",
+    "version": "1.1.0",
+    "authors": [
+        {
+            "name": "Ruhrcoder (René Schustek)",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=8.2",
+        "shopware/core": "~6.7.0 || ~6.8.0",
+        "shopware/storefront": "~6.7.0 || ~6.8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^10.5 || ^11.0",
+        "phpstan/phpstan": "^1.0",
+        "friendsofphp/php-cs-fixer": "^3.0"
+    },
+    "extra": {
+        "shopware-plugin-class": "Ruhrcoder\\RcCustomerImageGallery\\RcCustomerImageGallery",
+        "label": {
+            "de-DE": "Kundenbild-Galerie",
+            "en-GB": "Customer Image Gallery"
+        },
+        "description": {
+            "de-DE": "Manuell pro Produkt aus der Media-Bibliothek gewaehlte Bildergalerie auf der Produktdetailseite.",
+            "en-GB": "Per-product image gallery selected manually from the media library, shown on the product detail page."
+        },
+        "manufacturerLink": {
+            "de-DE": "https://ruhrcoder.de",
+            "en-GB": "https://ruhrcoder.de"
+        },
+        "supportLink": {
+            "de-DE": "https://ruhrcoder.de",
+            "en-GB": "https://ruhrcoder.de"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Ruhrcoder\\RcCustomerImageGallery\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ruhrcoder\\RcCustomerImageGallery\\Tests\\": "tests/"
+        }
+    },
+    "config": {
+        "allow-plugins": {
+            "symfony/runtime": true
+        },
+        "platform": {
+            "php": "8.2.0"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "phpstan": "vendor/bin/phpstan analyse --memory-limit=512M",
+        "cs-fix": "vendor/bin/php-cs-fixer fix",
+        "cs-check": "vendor/bin/php-cs-fixer fix --dry-run --diff",
+        "quality": [
+            "@cs-check",
+            "@phpstan",
+            "@test"
+        ]
+    }
+}

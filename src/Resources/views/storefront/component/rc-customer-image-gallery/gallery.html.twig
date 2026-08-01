@@ -1,0 +1,27 @@
+{# Rendert die im Produkt gepflegte Kundenbild-Galerie. Erwartet `gallery` (GalleryStruct). #}
+{% block rc_customer_image_gallery %}
+    {% if gallery and gallery.totalCount > 0 %}
+        <div class="rc-customer-image-gallery">
+            {% block rc_customer_image_gallery_grid %}
+                <div class="rc-cig-grid row">
+                    {% for media in gallery.media %}
+                        {% if media.url %}
+                            <div class="rc-cig-grid-item col-6 col-md-4 col-lg-3">
+                                <a class="rc-cig-link"
+                                   href="{{ media.url }}"
+                                   target="_blank"
+                                   rel="noopener noreferrer">
+                                    {% set rcThumbnail = media.thumbnails is defined and media.thumbnails is not empty ? media.thumbnails.first : null %}
+                                    <img class="rc-cig-image"
+                                         src="{{ rcThumbnail and rcThumbnail.url ? rcThumbnail.url : media.url }}"
+                                         alt="{{ media.alt is not empty ? media.alt : ('rcCustomerImageGallery.imageAlt'|trans) }}"
+                                         loading="lazy" />
+                                </a>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            {% endblock %}
+        </div>
+    {% endif %}
+{% endblock %}

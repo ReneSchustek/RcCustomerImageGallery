@@ -1,0 +1,71 @@
+{% block rc_cig_product_tab %}
+    <sw-card class="rc-cig-product-tab" :title="$tc('rcCustomerImageGallery.productTab.title')" :isLoading="isLoading">
+        <template v-if="product">
+            <p class="rc-cig-intro">{{ $tc('rcCustomerImageGallery.productTab.intro') }}</p>
+
+            {% block rc_cig_product_tab_actions %}
+                <div class="rc-cig-actions">
+                    <sw-button variant="ghost" @click="onOpenMediaModal">
+                        {{ $tc('rcCustomerImageGallery.productTab.selectImages') }}
+                    </sw-button>
+                </div>
+            {% endblock %}
+
+            {% block rc_cig_product_tab_preview %}
+                <div v-if="mediaItems.length === 0" class="rc-cig-empty">
+                    {{ $tc('rcCustomerImageGallery.productTab.empty') }}
+                </div>
+
+                <ul v-else class="rc-cig-preview-list">
+                    <li v-for="(item, index) in mediaItems" :key="item.id" class="rc-cig-preview-item">
+                        <div class="rc-cig-preview-thumb">
+                            <img v-if="mediaPreviewUrl(item)" :src="mediaPreviewUrl(item)" :alt="item.fileName" />
+                        </div>
+                        <div class="rc-cig-preview-meta">
+                            <span class="rc-cig-preview-position">{{ index + 1 }}</span>
+                            <span class="rc-cig-preview-name">{{ item.fileName }}</span>
+                        </div>
+                        <div class="rc-cig-preview-controls">
+                            <sw-button
+                                size="small"
+                                :disabled="index === 0"
+                                @click="onMoveUp(index)">
+                                {{ $tc('rcCustomerImageGallery.productTab.moveUp') }}
+                            </sw-button>
+                            <sw-button
+                                size="small"
+                                :disabled="index === mediaItems.length - 1"
+                                @click="onMoveDown(index)">
+                                {{ $tc('rcCustomerImageGallery.productTab.moveDown') }}
+                            </sw-button>
+                            <sw-button
+                                size="small"
+                                variant="danger"
+                                @click="onRemoveMedia(index)">
+                                {{ $tc('rcCustomerImageGallery.productTab.remove') }}
+                            </sw-button>
+                        </div>
+                    </li>
+                </ul>
+            {% endblock %}
+
+            {% block rc_cig_product_tab_save %}
+                <div class="rc-cig-save">
+                    <sw-button-process variant="primary" :isLoading="isSaving" @click="onSave">
+                        {{ $tc('global.default.save') }}
+                    </sw-button-process>
+                </div>
+            {% endblock %}
+
+            {% block rc_cig_product_tab_media_modal %}
+                <sw-media-modal-v2
+                    v-if="showMediaModal"
+                    :allow-multi-select="true"
+                    entity-context="product"
+                    @media-modal-selection-change="onMediaSelectionChange"
+                    @modal-close="onCloseMediaModal">
+                </sw-media-modal-v2>
+            {% endblock %}
+        </template>
+    </sw-card>
+{% endblock %}

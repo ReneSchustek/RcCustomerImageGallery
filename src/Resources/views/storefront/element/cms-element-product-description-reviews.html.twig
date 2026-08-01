@@ -1,0 +1,47 @@
+{% sw_extends '@Storefront/storefront/element/cms-element-product-description-reviews.html.twig' %}
+
+{# Haengt einen zusaetzlichen Tab „Kundenbilder" an die Beschreibung/Bewertungen-Tabs an.
+   Quelle ist die Page-Extension rcCustomerImageGallery (ProductPageSubscriber). #}
+{% block element_product_description_reviews_tabs_navigation_review %}
+    {{ parent() }}
+
+    {% set rcGallery = page.extensions.rcCustomerImageGallery|default(null) %}
+    {% if rcGallery and rcGallery.totalCount > 0 %}
+        {% set rcGalleryTabId = "rc-cig-tab-" ~ product.id %}
+        {% set rcGalleryTabHref = "#rc-cig-tab-" ~ product.id ~ "-pane" %}
+        {% set rcGalleryTabContent = "rc-cig-tab-" ~ product.id ~ "-pane" %}
+        <li class="nav-item">
+            <a class="nav-link product-detail-tab-navigation-link rc-cig-tab"
+               id="{{ rcGalleryTabId }}"
+               data-bs-toggle="tab"
+               data-off-canvas-tabs="true"
+               href="{{ rcGalleryTabHref }}"
+               role="tab"
+               aria-controls="{{ rcGalleryTabContent }}"
+               aria-selected="false">
+                <span>{{ "rcCustomerImageGallery.tabTitle"|trans|sw_sanitize }}</span>
+                <span class="product-detail-tab-navigation-icon">
+                    {% sw_icon 'arrow-medium-right' style {'pack':'solid'} %}
+                </span>
+            </a>
+        </li>
+    {% endif %}
+{% endblock %}
+
+{% block element_product_description_reviews_tabs_content_review %}
+    {{ parent() }}
+
+    {% set rcGallery = page.extensions.rcCustomerImageGallery|default(null) %}
+    {% if rcGallery and rcGallery.totalCount > 0 %}
+        {% set rcGalleryTabId = "rc-cig-tab-" ~ product.id %}
+        {% set rcGalleryTabContent = "rc-cig-tab-" ~ product.id ~ "-pane" %}
+        <div class="tab-pane fade"
+             id="{{ rcGalleryTabContent }}"
+             role="tabpanel"
+             aria-labelledby="{{ rcGalleryTabId }}">
+            {% sw_include '@Storefront/storefront/component/rc-customer-image-gallery/gallery.html.twig' with {
+                gallery: rcGallery
+            } %}
+        </div>
+    {% endif %}
+{% endblock %}

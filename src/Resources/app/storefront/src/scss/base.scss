@@ -1,0 +1,14 @@
+// Kundenbild-Galerie auf der Produktdetailseite
+.rc-customer-image-gallery {
+    .rc-cig-grid-item {
+        margin-bottom: 20px;
+    }
+
+    .rc-cig-image {
+        display: block;
+        width: 100%;
+        height: auto;
+        border-radius: 4px;
+        object-fit: cover;
+    }
+}

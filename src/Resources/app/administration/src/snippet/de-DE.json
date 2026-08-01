@@ -1,0 +1,14 @@
+{
+  "rcCustomerImageGallery": {
+    "productTab": {
+      "title": "Kundenbilder-Galerie",
+      "intro": "Wähle Bilder aus der Media-Bibliothek, die als Galerie auf der Produktdetailseite angezeigt werden. Die Reihenfolge der Vorschau entspricht der Anzeige im Shop.",
+      "selectImages": "Bilder auswählen",
+      "empty": "Noch keine Bilder ausgewählt. Über „Bilder auswählen“ kannst du Medien aus der Bibliothek hinzufügen.",
+      "moveUp": "Nach oben",
+      "moveDown": "Nach unten",
+      "remove": "Entfernen",
+      "saved": "Kundenbilder-Galerie gespeichert."
+    }
+  }
+}
