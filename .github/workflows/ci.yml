@@ -1,0 +1,61 @@
+name: CI
+
+# Prüft bei jedem Push und jedem Pull Request dasselbe, was das lokale Gate prüft:
+# Sicherheitslücken, Stil, statische Analyse, Tests. Das Gate bleibt die schärfere
+# Prüfung — es läuft zusätzlich gegen eine echte Shopware-Instanz. Diese Strecke hier
+# beantwortet die Frage, die ein Fremder am Repository stellt: Ist der Stand in sich
+# stimmig?
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  quality:
+    name: Code-Qualität (PHP 8.3)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Quellcode auschecken
+        uses: actions/checkout@v5
+
+      - name: PHP 8.3 einrichten
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, xml, ctype, iconv, intl, pdo, pdo_mysql, curl, zip
+          coverage: none
+          tools: composer:v2
+
+      - name: Composer-Cache laden
+        uses: actions/cache@v5
+        with:
+          path: vendor
+          key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
+          restore-keys: ${{ runner.os }}-composer-
+
+      - name: Abhängigkeiten auflösen
+        # Ohne committeten Lock (Library-Konvention) löst install frisch auf.
+        #
+        # --no-scripts: Die Prüfungen brauchen keine gebootete Anwendung. Ohne den
+        # Schalter scheitert Symfonys cache:clear an der fehlenden .env, und kein
+        # einziger Schritt danach käme zum Zug.
+        run: composer install --no-interaction --prefer-dist --no-progress --no-scripts
+
+      - name: Bekannte Sicherheitslücken prüfen
+        # Abgekündigte Pakete werden nur berichtet — sie sind keine Lücke.
+        run: composer audit --no-interaction --abandoned=report
+
+      - name: Code-Style prüfen
+        run: composer cs-check
+
+      - name: Statische Analyse (PHPStan Level 8)
+        run: composer phpstan
+
+      - name: Tests ausführen
+        run: composer test

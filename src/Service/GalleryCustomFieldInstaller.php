@@ -103,7 +103,7 @@ final class GalleryCustomFieldInstaller
     {
         $criteria = new Criteria();
         $criteria->addFilter(new EqualsFilter('name', self::SET_NAME));
-        $set = $this->customFieldSetRepository->search($criteria, $context)->first();
+        $set = $this->customFieldSetRepository->search($criteria, $context)->getEntities()->first();
 
         if (!$set instanceof CustomFieldSetEntity) {
             $this->logger->info('RcCustomerImageGallery: CustomFieldSet bereits abwesend, Uninstall ist No-op.', [
@@ -247,7 +247,7 @@ final class GalleryCustomFieldInstaller
         $criteria->addFilter(new EqualsFilter('name', $name));
         $criteria->addAssociation('relations');
 
-        $set = $this->customFieldSetRepository->search($criteria, $context)->first();
+        $set = $this->customFieldSetRepository->search($criteria, $context)->getEntities()->first();
 
         return $set instanceof CustomFieldSetEntity ? $set : null;
     }

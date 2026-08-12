@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.1.1] - 2026-08-10 — Backoffice-Übersetzungen und Vorbereitung auf 6.8
+
+### Geändert
+
+- **Die Übersetzungen im Backoffice werden wieder angemeldet.** Der bisherige Weg existiert in Shopware 6.7 nicht mehr; der Aufruf brach beim Laden der Administration ab, und alles danach wurde nicht mehr ausgeführt.
+- **Vorbereitung auf die nächste Shopware-Hauptversion.** Der Zugriff auf Suchergebnisse folgt der Schreibweise, die Shopware 6.8 verlangt. Am Verhalten ändert sich nichts.
+
 ## [1.1.0] - 2026-06-28
 
 ### Geändert (Breaking)
