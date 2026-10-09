@@ -1,0 +1,23 @@
+{
+  "base": "/bundles/rccustomerimagegallery/administration/",
+  "entryPoints": {
+    "rc-customer-image-gallery": {
+      "css": [],
+      "dynamic": [],
+      "js": [
+        "/bundles/rccustomerimagegallery/administration/assets/rc-customer-image-gallery-BJArWZnZ.js"
+      ],
+      "legacy": false,
+      "preload": []
+    }
+  },
+  "legacy": false,
+  "metadatas": {},
+  "version": [
+    "7.1.0",
+    7,
+    1,
+    0
+  ],
+  "viteServer": null
+}

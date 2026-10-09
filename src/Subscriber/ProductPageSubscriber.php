@@ -13,7 +13,6 @@ final class ProductPageSubscriber implements EventSubscriberInterface
 {
     private const CONFIG_ENABLED = 'RcCustomerImageGallery.config.enabled';
     private const CONFIG_LIMIT = 'RcCustomerImageGallery.config.limit';
-    private const DEFAULT_LIMIT = 12;
 
     public function __construct(
         private readonly GalleryLoader $galleryLoader,
@@ -40,12 +39,15 @@ final class ProductPageSubscriber implements EventSubscriberInterface
             return;
         }
 
-        $limit = $this->getLimit($salesChannelId);
-        $gallery = $this->galleryLoader->loadForProduct(
-            $product,
-            $event->getSalesChannelContext()->getContext(),
-            $limit,
-        );
+        $context = $event->getSalesChannelContext()->getContext();
+        $limit = $this->configuredLimit($salesChannelId);
+
+        // Ohne eingestellte Zahl entscheidet der Lader. Eine eigene Vorgabe hier wäre eine
+        // zweite Wahrheit — und die beiden liefen auseinander, sobald jemand nur eine von
+        // beiden ändert.
+        $gallery = $limit === null
+            ? $this->galleryLoader->loadForProduct($product, $context)
+            : $this->galleryLoader->loadForProduct($product, $context, $limit);
 
         $event->getPage()->addExtension('rcCustomerImageGallery', $gallery);
     }
@@ -57,13 +59,21 @@ final class ProductPageSubscriber implements EventSubscriberInterface
         return $value === null ? true : (bool) $value;
     }
 
-    private function getLimit(?string $salesChannelId): int
+    /**
+     * Die eingestellte Bildzahl — oder `null`, wenn nichts Brauchbares eingestellt ist.
+     *
+     * Das Eingabefeld liefert je nach Herkunft eine Zahl oder eine Zeichenkette; alles andere
+     * (leer, Text, Komma) gilt als nicht eingestellt. Die Ober- und Untergrenze setzt der
+     * Lader, nicht diese Stelle.
+     */
+    private function configuredLimit(?string $salesChannelId): ?int
     {
         $value = $this->systemConfigService->get(self::CONFIG_LIMIT, $salesChannelId);
-        if (\is_int($value) || (\is_string($value) && ctype_digit($value))) {
-            return (int) $value;
+
+        if (\is_int($value)) {
+            return $value;
         }
 
-        return self::DEFAULT_LIMIT;
+        return \is_string($value) && ctype_digit($value) ? (int) $value : null;
     }
 }

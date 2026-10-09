@@ -1,5 +1,41 @@
 # Changelog
 
+## [1.2.2] - 2026-10-09 — Die Zusatzfelder heißen wie die Erweiterung
+
+### Geändert
+
+- Unter „Zusatzfelder“ am Artikel stand „Kundenbilder-Galerie“, unter Erweiterungen „Kundenbild-Galerie“. Beide heißen jetzt gleich. Der Reiter am Produkt behält vorerst seinen Namen; er ändert sich erst mit dem nächsten Bau der Verwaltungsoberfläche.
+
+## [1.2.1] - 2026-08-17 — Die Bilder lassen sich wieder auswählen
+
+### Behoben
+
+- **Am Produkt fehlte der Reiter, über den die Kundenbilder ausgewählt werden.** Damit war die
+  Erweiterung praktisch nicht bedienbar: Der Reiter im Shop erscheint erst, wenn Bilder zugeordnet
+  sind, und zuordnen ließ sich keines. Ursache waren die fehlenden gebauten Dateien des
+  Backoffice-Teils: Ohne sie kündigt Shopware das Bündel nicht an und lädt es nie — ohne
+  Fehlermeldung. Wer den Verwaltungsbereich nach der Installation neu baut, hat den Reiter nie
+  vermisst.
+
+## [1.2.0] - 2026-08-12 — Aufgeräumt und abgesichert
+
+### Geändert
+
+- **Die Bildzahl hat nur noch eine Vorgabe.** Sie stand doppelt im Code — einmal beim Lader, einmal
+  bei der Anbindung an die Produktseite. Wer nur eine von beiden geändert hätte, hätte je nach Weg
+  eine andere Zahl bekommen. Jetzt entscheidet der Lader; die Anbindung reicht nur weiter, was
+  eingestellt ist. Sichtbar ändert sich nichts.
+- **Ein Textbaustein ohne Verwendung ist entfernt.** `heading` wurde in keiner Vorlage benutzt.
+
+### Neu
+
+- **Prüfungen für die Anbindung an die Produktseite und für den Installer.** Bisher waren nur Lader
+  und Struktur geprüft. Neu abgedeckt: die Ein- und Ausschaltung, die eingestellte Bildzahl in allen
+  Schreibweisen, die Wiedererkennung von Feld, Feldsatz und Zuordnung bei einer erneuten
+  Installation, und der Umgang mit einem Feld, dessen Typ aus einer früheren Fassung abweicht.
+- **Ein Vertragstest für die Einhängestellen.** Ein Block, den es in der Kernvorlage nicht gibt,
+  wird von Twig wortlos übergangen — die Registerkarte erschiene nie, und nichts würde rot.
+
 ## [1.1.1] - 2026-08-10 — Backoffice-Übersetzungen und Vorbereitung auf 6.8
 
 ### Geändert

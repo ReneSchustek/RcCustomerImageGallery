@@ -15,7 +15,6 @@ use Shopware\Core\Framework\Context;
 use Shopware\Core\Framework\DataAbstractionLayer\EntityRepository;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\Criteria;
 use Shopware\Core\Framework\DataAbstractionLayer\Search\EntitySearchResult;
-use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsAnyFilter;
 
 final class GalleryLoaderTest extends TestCase
 {
@@ -92,12 +91,12 @@ final class GalleryLoaderTest extends TestCase
             ->method('search')
             ->with(
                 $this->callback(static function (Criteria $criteria): bool {
-                    $filters = $criteria->getFilters();
-                    if (\count($filters) !== 1 || !$filters[0] instanceof EqualsAnyFilter) {
+                    // Die Kennungen stehen im Criteria selbst, nicht in einem Filter.
+                    if ($criteria->getFilters() !== []) {
                         return false;
                     }
 
-                    return $filters[0]->getValue() === ['id-a', 'id-b'];
+                    return $criteria->getIds() === ['id-a', 'id-b'];
                 }),
                 $this->isInstanceOf(Context::class),
             )
@@ -128,12 +127,14 @@ final class GalleryLoaderTest extends TestCase
                     if ($criteria->getLimit() !== 50) {
                         return false;
                     }
-                    $filters = $criteria->getFilters();
-                    if (\count($filters) !== 1 || !$filters[0] instanceof EqualsAnyFilter) {
+
+                    // Die Kennungen stehen im Criteria selbst, nicht in einem Filter: Shopware
+                    // löst sie dann über den Primärschlüssel auf.
+                    if ($criteria->getFilters() !== []) {
                         return false;
                     }
 
-                    return \count($filters[0]->getValue()) === 50;
+                    return \count($criteria->getIds()) === 50;
                 }),
                 $this->isInstanceOf(Context::class),
             )

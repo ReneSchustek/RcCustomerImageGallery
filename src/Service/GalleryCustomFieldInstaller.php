@@ -14,7 +14,6 @@ use Shopware\Core\Framework\DataAbstractionLayer\Search\Filter\EqualsFilter;
 use Shopware\Core\System\CustomField\Aggregate\CustomFieldSet\CustomFieldSetCollection;
 use Shopware\Core\System\CustomField\Aggregate\CustomFieldSet\CustomFieldSetEntity;
 use Shopware\Core\System\CustomField\CustomFieldCollection;
-use Shopware\Core\System\CustomField\CustomFieldEntity;
 use Shopware\Core\System\CustomField\CustomFieldTypes;
 
 /**
@@ -66,7 +65,7 @@ final class GalleryCustomFieldInstaller
             'name' => self::SET_NAME,
             'config' => [
                 'label' => [
-                    'de-DE' => 'Kundenbilder-Galerie',
+                    'de-DE' => 'Kundenbild-Galerie',
                     'en-GB' => 'Customer Image Gallery',
                 ],
             ],
@@ -157,9 +156,6 @@ final class GalleryCustomFieldInstaller
         $toDelete = [];
         $drift = [];
         foreach ($this->customFieldRepository->search($criteria, $context)->getEntities() as $entity) {
-            if (!$entity instanceof CustomFieldEntity) {
-                continue;
-            }
             $name = $entity->getName();
             $currentType = $entity->getType();
             $expectedType = $expectedTypeByName[$name] ?? null;
@@ -218,7 +214,11 @@ final class GalleryCustomFieldInstaller
     }
 
     /**
-     * @param array<int, string> $names
+     * Die Namen kommen aus `array_values()` und sind damit eine lückenlose Liste. `list<string>`
+     * sagt das aus; `array<int, string>` ließe auch negative Schlüssel zu — und genau die nimmt
+     * der Filter nicht an.
+     *
+     * @param list<string> $names
      *
      * @return array<string, string>
      */
@@ -229,13 +229,8 @@ final class GalleryCustomFieldInstaller
 
         $map = [];
         foreach ($this->customFieldRepository->search($criteria, $context)->getEntities() as $entity) {
-            if (!$entity instanceof CustomFieldEntity) {
-                continue;
-            }
-            $name = $entity->getName();
-            if (is_string($name) && $name !== '') {
-                $map[$name] = $entity->getId();
-            }
+            // Der Name ist laut Typangabe ein Text; eine Prüfung darauf kann nicht fehlschlagen.
+            $map[$entity->getName()] = $entity->getId();
         }
 
         return $map;
@@ -297,7 +292,7 @@ final class GalleryCustomFieldInstaller
                 'type' => CustomFieldTypes::JSON,
                 'config' => [
                     'label' => [
-                        'de-DE' => 'Kundenbilder-Galerie: Medien',
+                        'de-DE' => 'Kundenbild-Galerie: Medien',
                         'en-GB' => 'Customer Image Gallery: Media',
                     ],
                     'helpText' => [
