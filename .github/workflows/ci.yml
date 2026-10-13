@@ -1,8 +1,8 @@
 name: CI
 
-# Prüft bei jedem Push und jedem Pull Request dasselbe, was das lokale Gate prüft:
-# Sicherheitslücken, Stil, statische Analyse, Tests. Das Gate bleibt die schärfere
-# Prüfung — es läuft zusätzlich gegen eine echte Shopware-Instanz. Diese Strecke hier
+# Prüft bei jedem Push und jedem Pull Request dasselbe, was die lokale Prüfung abdeckt:
+# Sicherheitslücken, Stil, statische Analyse, Tests. Die lokale Prüfung bleibt die
+# schärfere, weil sie zusätzlich gegen eine echte Shopware-Instanz läuft. Diese Strecke hier
 # beantwortet die Frage, die ein Fremder am Repository stellt: Ist der Stand in sich
 # stimmig?
 

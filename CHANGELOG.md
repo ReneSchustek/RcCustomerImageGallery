@@ -1,6 +1,6 @@
 # Changelog
 
-## [1.2.3] - 2026-10-13 — Ecken wie das Theme
+## [1.2.3] - 2026-10-13: Ecken wie das Theme
 
 ### Geändert
 
@@ -8,28 +8,28 @@
 
 > **Deployment:** `plugin:update RcCustomerImageGallery`, `theme:compile`, `cache:clear`.
 
-## [1.2.2] - 2026-10-09 — Die Zusatzfelder heißen wie die Erweiterung
+## [1.2.2] - 2026-10-09: Die Zusatzfelder heißen wie die Erweiterung
 
 ### Geändert
 
 - Unter „Zusatzfelder“ am Artikel stand „Kundenbilder-Galerie“, unter Erweiterungen „Kundenbild-Galerie“. Beide heißen jetzt gleich. Der Reiter am Produkt behält vorerst seinen Namen; er ändert sich erst mit dem nächsten Bau der Verwaltungsoberfläche.
 
-## [1.2.1] - 2026-08-17 — Die Bilder lassen sich wieder auswählen
+## [1.2.1] - 2026-08-17: Die Bilder lassen sich wieder auswählen
 
 ### Behoben
 
 - **Am Produkt fehlte der Reiter, über den die Kundenbilder ausgewählt werden.** Damit war die
   Erweiterung praktisch nicht bedienbar: Der Reiter im Shop erscheint erst, wenn Bilder zugeordnet
   sind, und zuordnen ließ sich keines. Ursache waren die fehlenden gebauten Dateien des
-  Backoffice-Teils: Ohne sie kündigt Shopware das Bündel nicht an und lädt es nie — ohne
-  Fehlermeldung. Wer den Verwaltungsbereich nach der Installation neu baut, hat den Reiter nie
+  Backoffice-Teils: Ohne sie kündigt Shopware das Bündel nicht an und lädt es nie, und eine
+  Fehlermeldung gibt es dabei nicht. Wer den Verwaltungsbereich nach der Installation neu baut, hat den Reiter nie
   vermisst.
 
-## [1.2.0] - 2026-08-12 — Aufgeräumt und abgesichert
+## [1.2.0] - 2026-08-12: Aufgeräumt und abgesichert
 
 ### Geändert
 
-- **Die Bildzahl hat nur noch eine Vorgabe.** Sie stand doppelt im Code — einmal beim Lader, einmal
+- **Die Bildzahl hat nur noch eine Vorgabe.** Sie stand doppelt im Code: einmal beim Lader, einmal
   bei der Anbindung an die Produktseite. Wer nur eine von beiden geändert hätte, hätte je nach Weg
   eine andere Zahl bekommen. Jetzt entscheidet der Lader; die Anbindung reicht nur weiter, was
   eingestellt ist. Sichtbar ändert sich nichts.
@@ -42,9 +42,9 @@
   Schreibweisen, die Wiedererkennung von Feld, Feldsatz und Zuordnung bei einer erneuten
   Installation, und der Umgang mit einem Feld, dessen Typ aus einer früheren Fassung abweicht.
 - **Ein Vertragstest für die Einhängestellen.** Ein Block, den es in der Kernvorlage nicht gibt,
-  wird von Twig wortlos übergangen — die Registerkarte erschiene nie, und nichts würde rot.
+  wird von Twig wortlos übergangen. Die Registerkarte erschiene nie, und nichts würde rot.
 
-## [1.1.1] - 2026-08-10 — Backoffice-Übersetzungen und Vorbereitung auf 6.8
+## [1.1.1] - 2026-08-10: Backoffice-Übersetzungen und Vorbereitung auf 6.8
 
 ### Geändert
 
@@ -72,15 +72,15 @@
 
 ### Hinzugefügt
 - Erst-Release. **Liest Kundenbilder aus dem CustomField `rc_review_image_id` der ProductReviews** und stellt sie als `GalleryStruct` als Page-Extension `rcCustomerImageGallery` zur Verfügung
-- **Kein eigener Upload-Pfad** — Bilder werden über den Standard-Customer-Account-Pfad bei der Bewertungs-Erstellung hochgeladen (CustomField wird vom Storefront-Form ggf. separat gepflegt). Damit entfallen Storage-/Moderation-/ACL-/DSGVO-Komplikationen
+- **Kein eigener Upload-Pfad.** Bilder werden über den Standard-Customer-Account-Pfad bei der Bewertungs-Erstellung hochgeladen (CustomField wird vom Storefront-Form ggf. separat gepflegt). Damit entfallen Storage-/Moderation-/ACL-/DSGVO-Komplikationen
 - `ProductPageSubscriber` auf `ProductPageLoadedEvent`
 - Plugin-Config: `enabled` (Bool), `limit` (1-50, Default 12)
 - 6 Unit-Tests (GalleryStruct + GalleryLoader inkl. Edge-Cases)
 
 ### Bewusste Einschränkungen
 - **MVP-Scope:** Read-Only-Galerie. Upload-Form muss vom Customer-Account-Theme bereitgestellt werden (Standard-Shopware-Account → My-Reviews + ProductReview-CustomField)
-- **DSGVO:** Bilder gehören zu Reviews, die der Customer selbst veröffentlicht hat — implizite Zustimmung vorhanden. Löschpfad: Review löschen entfernt auch die Galerie-Anzeige
+- **DSGVO:** Bilder gehören zu Reviews, die der Customer selbst veröffentlicht hat, die Zustimmung liegt damit implizit vor. Löschpfad: Review löschen entfernt auch die Galerie-Anzeige
 
 ### Sicherheit
-- Filter `status=true` greift — nur freigegebene Reviews
+- Filter `status=true` greift, es zählen also nur freigegebene Reviews
 - `rc_review_image_id` wird nur als String validiert; volles Media-Lookup erfolgt im Twig über Shopware-Standard-Media-Repository (Auto-Escape, Path-Safety)
