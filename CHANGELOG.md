@@ -1,5 +1,13 @@
 # Changelog
 
+## [1.2.3] - 2026-10-13 — Ecken wie das Theme
+
+### Geändert
+
+- Die Kundenbilder nehmen den Radius des Themes statt fester 4 Pixel: 2 in Design 2027, 8 im bisherigen Theme.
+
+> **Deployment:** `plugin:update RcCustomerImageGallery`, `theme:compile`, `cache:clear`.
+
 ## [1.2.2] - 2026-10-09 — Die Zusatzfelder heißen wie die Erweiterung
 
 ### Geändert
