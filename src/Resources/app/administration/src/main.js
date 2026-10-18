@@ -6,7 +6,7 @@ import enGB from './snippet/en-GB.json';
 
 /*
  * Übersetzungen werden über `Locale.extend` angemeldet. Einen Initializer-Dekorator für `locale`
- * gibt es in Shopware 6.7 nicht mehr, und ein Aufruf darüber wirft bei jedem Laden der
+ * kennt Shopware 6.7 nicht, und ein Aufruf darüber wirft bei jedem Laden der
  * Administration eine Ausnahme. Die Übersetzungen kämen über die serverseitige Auslieferung zwar
  * trotzdem an, aber ein roter Eintrag in der Konsole macht jede echte Meldung schwerer auffindbar.
  */

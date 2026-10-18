@@ -92,7 +92,7 @@ final class ProductPageSubscriberTest extends TestCase
 
     /**
      * **Der Punkt, um den es geht.** Steht nichts Brauchbares in der Einstellung, entscheidet
-     * der Lader — der Subscriber führt keine eigene Vorgabe mehr. Zwei Vorgaben liefen
+     * der Lader — der Subscriber führt keine eigene Vorgabe. Zwei Vorgaben liefen
      * auseinander, sobald jemand nur eine von beiden ändert.
      *
      * Geprüft über den Aufruf ohne dritten Parameter: Genau dann greift die Vorgabe des Laders.
