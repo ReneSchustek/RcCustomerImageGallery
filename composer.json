@@ -2,7 +2,7 @@
     "name": "ruhrcoder/rc-customer-image-gallery",
     "description": "Shopware 6 Plugin — pro Produkt manuell aus der Media-Bibliothek gewählte Bildergalerie auf der Produktdetailseite",
     "type": "shopware-platform-plugin",
-    "license": "MIT",
+    "license": "proprietary",
     "version": "1.2.3",
     "authors": [
         {
